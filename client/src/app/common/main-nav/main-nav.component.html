@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer color='primary' class="sidenav" fixedInViewport=false
+      [ngClass]="{hidden: (isHandset$ | async)===false}"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Asset Management System</span>
+      <span class="spacer"></span>
+       <a *ngIf='!showLinks' [routerLink]="['register']" [routerLinkActive]="['router-link-active']" href="">Register</a>
+       <a *ngIf='!showLinks' [routerLink]="['login']" [routerLinkActive]="['router-link-active']" href="">Login</a>
+             <button mat-button [matMenuTriggerFor]="assetmanagement" *ngIf='showLinks'>Asset Management</button>
+             <mat-menu #assetmanagement="matMenu">
+               <button mat-menu-item> <a *ngIf='showLinks' [routerLink]="['asset']"
+                   [routerLinkActive]="['router-link-active']" href="">Asset
+                   Management</a></button>
+               <button mat-menu-item> <a *ngIf='showLinks' [routerLink]="['maintenance-record']"
+                   [routerLinkActive]="['router-link-active']" href="" >Maintenance Record</a></button>
+             </mat-menu>
+       <button mat-button [matMenuTriggerFor]="sysmanagement" *ngIf='showLinks'>Admin System Management</button>
+       <mat-menu #sysmanagement="matMenu">
+          <button mat-menu-item><a *ngIf='showLinks' [routerLink]="['organization']"
+              [routerLinkActive]="['router-link-active']" href="">Organization
+              Management</a></button>
+         <button mat-menu-item><a *ngIf='showLinks' [routerLink]="['users']" [routerLinkActive]="['router-link-active']"
+             href="">User Management</a></button>
+
+       </mat-menu>
+         <a *ngIf='showLinks' (click)='logout()'>Logout</a>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

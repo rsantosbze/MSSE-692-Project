@@ -1,0 +1,42 @@
+<mat-card class='card'>
+
+  <mat-card-header class='header'>
+    <mat-card-title>List of Organizations</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions class='header'>
+    <button mat-raised-button (click)="newOrganization()" color="accent">New Organization..</button>
+
+  </mat-card-actions>
+
+  <mat-card-content *ngIf="displayTable">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table ">
+      <!-- <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID </th>
+        <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="organizationName">
+        <th mat-header-cell *matHeaderCellDef>Organization Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.organizationName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="organizationType">
+        <th mat-header-cell *matHeaderCellDef> Organization Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.organizationType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf= "element.organizationType!=='COMPANY'">
+            <button mat-raised-button (click)="deleteOrganization(element)" color="warn">Delete</button>
+            <button mat-raised-button (click)="selectOrganization(element)" color="primary">Update</button>
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-card-content>
+</mat-card>

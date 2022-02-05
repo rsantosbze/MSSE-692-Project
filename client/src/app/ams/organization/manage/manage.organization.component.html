@@ -1,0 +1,98 @@
+<div class="container pt-5">
+  <mat-card class="col-8 mx-auto text-center">
+    <mat-card-header class='card'>
+      <mat-card-title>{{modalTitle}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class='card'>
+      <form id="ngForm" #detailForm="ngForm" novalidate [formGroup]="inputForm" (ngSubmit)="submit(inputForm)"
+        class="mat-elevation-z8" style="width: 100%; padding: 5px;">
+        <div style="display: flex; flex-direction: column; width:60%; margin:auto">
+          <mat-form-field class="col-5 mb-2 mx-auto">
+            <input matInput placeholder="Organization Name" formControlName="organizationName" name="organizationName"
+              required>
+            <mat-error *ngIf="f.organizationName.errors?.required">
+              Organization Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Organization Type</mat-label>
+            <mat-select formControlName="organizationType" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let type of orgTypes" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.organizationType.hasError('required')">Please choose an Organization Type</mat-error>
+          </mat-form-field>
+          <!-- <div formGroupName="address">
+
+            <mat-form-field appearance="fill">
+              <mat-label>Address Type</mat-label>
+              <mat-select formControlName="addressType" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let type of addressTypes" [value]="type">
+                  {{type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="inputForm.get('address.addressType')?.errors?.required">Please choose an Address Type
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="Street Line 1" name="streetLine1" formControlName="streetLine1" required>
+              <mat-error *ngIf="inputForm.get('address.streetLine1')?.errors?.required">
+                Street Line 1 is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="Street Line 2" name="streetLine2" formControlName="streetLine2">
+            </mat-form-field>
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="City" name="city" formControlName="city" required>
+              <mat-error *ngIf="inputForm.get('address.city')?.errors?.required">
+                City is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="State" name="state" formControlName="state" required>
+              <mat-error *ngIf="inputForm.get('address.state')?.errors?.required">
+                State is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="Zip Code" name="zipCode" formControlName="zipCode" required>
+              <mat-error *ngIf="inputForm.get('address.zipCode')?.errors?.required">
+                ZipCode is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="inputForm.get('address.zipCode')?.errors?.pattern">
+                ZipCode can only be <strong>numbers only</strong>
+              </mat-error>
+              <mat-error *ngIf="inputForm.get('address.zipCode')?.errors?.minlength">
+                ZipCode should be minimum <strong>5</strong> characters long
+              </mat-error>
+             <mat-error *ngIf="inputForm.get('address.zipCode')?.errors?.maxlength">
+                ZipCode should be max<strong>5</strong> characters long
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-5 mb-2 mx-auto">
+              <input matInput placeholder="Country" name="country" formControlName="country" required>
+              <mat-error *ngIf="inputForm.get('address.country')?.errors?.required">
+                Country is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+
+        </div>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions class='card'>
+      <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+
+      <button mat-raised-button form="ngForm" [disabled]="!inputForm.valid && enableButton" type="submit"
+        color="primary">{{modalBtnTitle}}</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>

@@ -1,0 +1,52 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @key(fields: String!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+directive @external on OBJECT | FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+type ResponseDTO {
+  action: String!
+  message: String
+  isValid: Boolean
+  isAdmin: Boolean
+  isActive: Boolean
+}
+
+type UserResponseDTO {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  username: String!
+  email: String!
+  status: Boolean!
+  role: String!
+}
+
+type Query {
+  findAllUsers: [UserResponseDTO!]!
+}
+
+type Mutation {
+  createUser(input: UserDTO!): ResponseDTO!
+  deleteUser(input: UserDTO!): ResponseDTO!
+  updateUser(input: UserDTO!): ResponseDTO!
+}
+
+input UserDTO {
+  _id: String
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String
+  email: String!
+  status: Boolean!
+  role: String!
+}

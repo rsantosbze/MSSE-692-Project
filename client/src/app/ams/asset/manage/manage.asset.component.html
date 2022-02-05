@@ -1,0 +1,126 @@
+<div class="container pt-5">
+  <mat-card class="col-8 mx-auto text-center">
+    <mat-card-header class='card'>
+      <mat-card-title>{{modalTitle}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class='card'>
+      <form id="ngForm" #detailForm="ngForm" novalidate [formGroup]="inputForm" (ngSubmit)="submit(inputForm)"
+        class="mat-elevation-z8" style="width: 100%; padding: 5px;">
+        <div style="display: flex; flex-direction: column; width:60%; margin:auto">
+          <mat-form-field class="col-5 mb-2 mx-auto">
+            <input matInput placeholder="Asset Code" formControlName="assetCode" name="assetCode" required>
+            <mat-error *ngIf="f.assetCode.errors?.required">
+              Asset Code is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-5 mb-2 mx-auto">
+            <input matInput placeholder="Asset Name" formControlName="assetName" name="assetName"
+              required>
+            <mat-error *ngIf="f.assetName.errors?.required">
+              Asset Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-5 mb-2 mx-auto">
+            <input matInput placeholder="Asset Description" formControlName="assetDescription" name="assetDescription"
+              required>
+            <mat-error *ngIf="f.assetDescription.errors?.required">
+              Asset Description is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+             <mat-form-field appearance="fill">
+               <mat-label>Facility</mat-label>
+               <mat-select formControlName="facilityId" required>
+                 <mat-option>--</mat-option>
+                 <mat-option *ngFor="let facility of facilities" [value]="facility._id">
+                   {{facility.organizationName}}
+                 </mat-option>
+               </mat-select>
+               <mat-error *ngIf="inputForm.get('facility._id')?.errors?.required">Please choose a Facility
+               </mat-error>
+             </mat-form-field>
+
+
+             <mat-form-field appearance="fill">
+               <mat-label>Supplier</mat-label>
+               <mat-select formControlName="supplierId" required>
+                 <mat-option>--</mat-option>
+                 <mat-option *ngFor="let supplier of suppliers" [value]="supplier._id">
+                   {{supplier.organizationName}}
+                 </mat-option>
+               </mat-select>
+               <mat-error *ngIf="inputForm.get('supplier._id')?.errors?.required">Please choose a Supplier
+               </mat-error>
+             </mat-form-field>
+
+          <!-- <div formGroupName="facility">
+            <mat-form-field appearance="fill">
+              <mat-label>Facility</mat-label>
+              <mat-select formControlName="_id" required >
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let facility of facilities" [value]="facility._id">
+                  {{facility.organizationName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="inputForm.get('facility._id')?.errors?.required">Please choose a Facility
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div formGroupName="supplier">
+            <mat-form-field appearance="fill">
+              <mat-label>Supplier</mat-label>
+              <mat-select formControlName="_id" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let supplier of suppliers" [value]="supplier._id">
+                  {{supplier.organizationName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="inputForm.get('supplier._id')?.errors?.required">Please choose a Supplier
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+          <mat-form-field color="accent" appearance="fill">
+            <mat-label>Date of Manufacture</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="dateOfManufacture">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 color="primary"></mat-datepicker>
+            <mat-error *ngIf="f.dateOfManufacture.errors?.required">
+              Date of Manufacture is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field color="accent" appearance="fill">
+            <mat-label>Date of Installation</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="dateOfInstallation">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+            <mat-error *ngIf="f.dateOfInstallation.errors?.required">
+              Date of Installation is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+
+          <!-- <section class="radio-section">
+            <label class="radio-margin">Role*:</label>
+            <mat-radio-group color="primary" formControlName="role" name='role' required>
+              <mat-radio-button class="radio-margin" name='role' value="ADMIN">Admin</mat-radio-button>
+              <mat-radio-button class="radio-margin" name='role' value="USER">User</mat-radio-button>
+            </mat-radio-group>
+          </section>
+          <mat-checkbox style="margin:auto" color='primary' class="example-margin" formControlName="status"
+            name="status">Active
+
+          </mat-checkbox> -->
+        </div>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions class='card'>
+      <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+
+      <button mat-raised-button form="ngForm" [disabled]="!inputForm.valid && enableButton" type="submit"
+        color="primary">{{modalBtnTitle}}</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>

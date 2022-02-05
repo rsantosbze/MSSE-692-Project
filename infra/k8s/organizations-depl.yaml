@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+ #namespace: ams-namespace 
+ name: organizations-depl
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: organizations
+  template:
+   metadata:
+    labels:
+     app: organizations
+   spec:
+    containers:
+     - name: organizations
+       image: rjsaint/organizations
+       env:
+         - name: JWT_SECRET
+          # value: "hellosss"
+           valueFrom:
+             secretKeyRef:
+               name: secrets
+               key: jwtSecret
+         - name: JWT_EXPIRE
+           value: 1h
+---
+apiVersion: v1
+kind: Service
+metadata:
+  #namespace: ams-namespace 
+  name: organizations-srv
+spec:
+  selector:
+    app: organizations
+  ports:
+    - name: organizations
+      protocol: TCP
+      port: 3004
+      targetPort: 3004

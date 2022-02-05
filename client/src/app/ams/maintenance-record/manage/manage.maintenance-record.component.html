@@ -1,0 +1,54 @@
+<div class="container pt-5">
+  <mat-card class="col-8 mx-auto text-center">
+    <mat-card-header class='card'>
+      <mat-card-title>{{modalTitle}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class='card'>
+      <form id="ngForm" #detailForm="ngForm" novalidate [formGroup]="inputForm" (ngSubmit)="submit(inputForm)"
+        class="mat-elevation-z8" style="width: 100%; padding: 5px;">
+        <div style="display: flex; flex-direction: column; width:60%; margin:auto">
+
+          <mat-form-field class="col-5 mb-2 mx-auto">
+            <input matInput placeholder="Maintenance Description" formControlName="maintenanceDescription" name="maintenanceDescription"
+              required>
+            <mat-error *ngIf="f.maintenanceDescription.errors?.required">
+              Maintenance Description is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Asset</mat-label>
+              <mat-select formControlName="assetId" required >
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let asset of assets" [value]="asset._id">
+                  {{asset.assetName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="inputForm.get('facility._id')?.errors?.required">Please choose a Facility
+              </mat-error>
+            </mat-form-field>
+
+
+          <mat-form-field color="accent" appearance="fill">
+            <mat-label>Date of Maintenance</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="dateOfMaintenance">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 color="primary"></mat-datepicker>
+            <mat-error *ngIf="f.dateOfMaintenance.errors?.required">
+              Date of Maintenance is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions class='card'>
+      <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+
+      <button mat-raised-button form="ngForm" [disabled]="!inputForm.valid && enableButton" type="submit"
+        color="primary">{{modalBtnTitle}}</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>

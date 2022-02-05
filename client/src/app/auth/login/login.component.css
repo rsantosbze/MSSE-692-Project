@@ -1,0 +1,13 @@
+.card {
+  width: 30%;
+  margin: 20px auto
+}
+
+.center{
+  text-align: center;
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

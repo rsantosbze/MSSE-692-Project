@@ -1,0 +1,68 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+deploy:
+  statusCheck: true
+  statusCheckDeadlineSeconds: 500
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+   push: false
+  artifacts:
+    # - image: rjsaint/client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile
+    #     # target: development
+    #   sync:
+    #     manual:
+    #       - src: 'src/**/*.ts'
+    #         dest: .
+    - image: rjsaint/users
+      context: users
+      docker:
+        dockerfile: Dockerfile
+        target: development
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rjsaint/assets
+      context: assets
+      docker:
+        dockerfile: Dockerfile
+        target: development
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rjsaint/organizations
+      context: organizations
+      docker:
+        dockerfile: Dockerfile
+        target: development
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rjsaint/maintenancerecords
+      context: maintenance-records
+      docker:
+        dockerfile: Dockerfile
+        target: development
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rjsaint/gateway
+      context: gateway
+      docker:
+        dockerfile: Dockerfile
+        target: development
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      
+   

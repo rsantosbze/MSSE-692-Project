@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-indigo);
+$my-app-accent: mat-palette($mat-green, A200, A100, A400);
+$my-app-warn: mat-palette($mat-red);
+$my-app-theme: mat-light-theme((
+  color: (primary: $my-app-primary,
+          accent: $my-app-accent,
+          warn: $my-app-warn,
+    )));
+
+    // Include the theme styles for only specified components.
+    @include mat-core-theme($my-app-theme);
+    @include mat-button-theme($my-app-theme);
+    @include mat-checkbox-theme($my-app-theme);
+// Include the default theme styles (color and default density)
+//@include angular-material-theme($my-app-theme);

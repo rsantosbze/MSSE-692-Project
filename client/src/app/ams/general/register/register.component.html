@@ -1,0 +1,45 @@
+<div class="container card ">
+  <mat-card style="text-align: center;">
+    <mat-card-title>{{modalTitle}}</mat-card-title>
+    <mat-card-content>
+      <form id="ngForm" #detailForm="ngForm" novalidate [formGroup]="registerForm" (ngSubmit)="submit(registerForm)"
+        class="mat-elevation-z8" style=" width: 60%; padding: 20px; margin:auto">
+        <div style="display: flex; flex-direction: column; width:40%; margin:auto">
+          <mat-form-field>
+            <input matInput placeholder="Username" name="username" formControlName="username" required>
+            <mat-error *ngIf="f.username.errors?.required">
+              Username is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="f.username.errors?.minlength">
+              Username must be at least <strong>3</strong> characters long
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" formControlName="password" name="password" required>
+            <mat-error *ngIf="f.password.errors?.required">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+           <mat-form-field class="col-5 mb-2 mx-auto">
+             <input matInput placeholder="Email" name="email" formControlName="email" required>
+             <mat-error *ngIf="f.email.errors?.required">
+               Email is <strong>required</strong>
+             </mat-error>
+             <mat-error *ngIf="f.email.errors?.email">
+               Incorrect email format
+             </mat-error>
+           </mat-form-field>
+        </div>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions class='center'>
+      <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+
+      <button mat-raised-button form="ngForm" [disabled]="!registerForm.valid" type="submit" color="primary">register</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+

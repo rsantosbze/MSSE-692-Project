@@ -1,0 +1,36 @@
+<div class="container card ">
+  <mat-card style="text-align: center;">
+      <mat-card-title>{{modalTitle}}</mat-card-title>
+    <mat-card-content>
+      <form id="ngForm" #detailForm="ngForm" novalidate [formGroup]="loginForm" (ngSubmit)="submit(loginForm)"
+        class="mat-elevation-z8" style=" width: 60%; padding: 20px; margin:auto">
+      <div style="display: flex; flex-direction: column; width:60%; margin:auto">
+          <mat-form-field >
+            <input matInput placeholder="Username" name="username" formControlName="username" required>
+            <mat-error *ngIf="f.username.errors?.required">
+              Username is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="f.username.errors?.minlength">
+              Username must be at least <strong>3</strong> characters long
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput placeholder="Password" type="password" formControlName="password" name="password" required>
+            <mat-error *ngIf="f.password.errors?.required">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions class='center'>
+      <button mat-raised-button (click)="cancel()" color="warn">Cancel</button>
+
+      <button mat-raised-button form="ngForm" [disabled]="!loginForm.valid" type="submit"
+        color="primary">Login</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+  </div>

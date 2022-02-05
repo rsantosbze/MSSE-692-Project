@@ -1,0 +1,17 @@
+.card {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.radio-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  margin:auto;
+}
+
+.radio-margin {
+  margin: 0 10px;
+}
